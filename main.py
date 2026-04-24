@@ -47,10 +47,10 @@ Gather 5-10 highly relevant papers.
 Then identify the most important mathematical formulas for this subject and recent trends.
 Populate the Report schema fully."""
     
-    model = init_chat_model('openai/gpt-5').with_structured_output(Report)
+    model = init_chat_model('openai:gpt-5').with_structured_output(Report)
 
-    result = model.ainvoke([
-        {'role': 'system', 'content': 'You are a thorough IT research assistant helping write academic papers and theses.'}
+    result = await model.ainvoke([
+        {'role': 'system', 'content': 'You are a thorough IT research assistant helping write academic papers and theses.'},
         {'role': 'user', 'content': task}
     ])
 
