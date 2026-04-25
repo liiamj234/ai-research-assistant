@@ -1,35 +1,37 @@
 # AI Research Assistant
 
-A simple Flask web app that generates structured academic research reports using the OpenAI API, LangChain, and Pydantic structured output.
+AI Research Assistant is a Flask web application that generates structured academic research reports using the OpenAI API, LangChain, and Pydantic.
 
-The app asks for:
-
-- A research topic
-- Key research questions
-- An optional paper timeframe
-
-It then generates a structured report containing:
-
-- 5–10 relevant academic papers
-- Key mathematical formulas related to the topic
-- Recent research trends
-- Raw JSON output for further use
+The application takes a research topic, key research questions, and an optional timeframe, then returns a structured report containing relevant academic papers, mathematical formulas, research trends, and raw JSON output.
 
 ---
 
-## What This Project Is Used For
+## Purpose
 
-This project is designed to help with early-stage academic research, thesis planning, literature review preparation, and research topic exploration.
+This project is designed to support early-stage academic research, thesis planning, literature review preparation, and technical topic exploration.
 
-It can be used to quickly generate a structured overview of a technical or academic subject before doing deeper manual research.
+It helps turn a broad research idea into a structured starting point by generating:
 
-Example topics:
+- Relevant papers
+- Key formulas
+- Research trends
+- Source links where available
+- Structured JSON output for reuse
 
-- Reinforcement learning for autonomous drones
-- Machine learning for medical imaging
-- Digital twins in smart manufacturing
-- Computer vision for agricultural robotics
-- Cybersecurity in IoT networks
+This is useful for quickly exploring a subject before moving into deeper manual research using academic databases.
+
+---
+
+## Features
+
+- Web-based research report generator
+- Flask backend
+- Clean HTML and CSS interface
+- OpenAI-powered structured output
+- Pydantic schema validation
+- MathJax support for displaying LaTeX formulas
+- JSON API endpoint
+- Raw JSON output for further processing
 
 ---
 
@@ -40,123 +42,174 @@ Example topics:
 - LangChain
 - OpenAI API
 - Pydantic
-- HTML / CSS
-- MathJax for displaying formulas
+- HTML
+- CSS
+- MathJax
 
 ---
 
 ## Project Structure
 
-ai-research-assistant/
-│
-├── main.py
-├── .env
-│
-├── templates/
-│   └── index.html
-│
-└── static/
-    └── styles.css
+    ai-research-assistant/
+    │
+    ├── main.py
+    ├── .env
+    │
+    ├── templates/
+    │   └── index.html
+    │
+    └── static/
+        └── styles.css
 
 ---
 
 ## Requirements
 
-You need Python installed on your machine.
+Python must be installed on the machine running the project.
 
-This project uses the OpenAI API, so you also need an OpenAI API key.
+This project also requires an OpenAI API key.
 
-Important: ChatGPT Plus and the OpenAI API are billed separately. Having ChatGPT Plus does not automatically give API credits.
+OpenAI API usage is billed separately from a ChatGPT subscription. A ChatGPT Plus subscription does not automatically provide OpenAI API credits.
 
 ---
 
 ## Installation
 
-Clone the repository:
+Move into the project directory:
 
-git clone https://github.com/YOUR-USERNAME/ai-research-assistant.git
-
-Move into the project folder:
-
-cd ai-research-assistant
+    cd ai-research-assistant
 
 Create a virtual environment:
 
-python -m venv venv
+    python -m venv venv
 
-Activate the virtual environment.
+Activate the virtual environment on Windows:
 
-On Windows:
+    venv\Scripts\activate
 
-venv\Scripts\activate
+Activate the virtual environment on macOS or Linux:
 
-On Mac/Linux:
+    source venv/bin/activate
 
-source venv/bin/activate
+Install the required Python packages:
 
-Install the required Python libraries:
-
-python -m pip install flask python-dotenv pydantic langchain langchain-openai
+    python -m pip install flask python-dotenv pydantic langchain langchain-openai
 
 ---
 
 ## Environment Variables
 
-Create a `.env` file in the root of the project:
+Create a `.env` file in the root directory of the project.
 
-OPENAI_API_KEY=your_openai_api_key_here
+The application expects the following environment variable:
 
-Replace `your_openai_api_key_here` with your real OpenAI API key.
+    OPENAI_API_KEY
 
-Do not upload your `.env` file to GitHub.
+The `.env` file should not be committed to GitHub.
+
+A `.gitignore` file should include:
+
+    .env
+    venv/
+    __pycache__/
 
 ---
 
-## Running the App
+## Running the Application
 
 Start the Flask app:
 
-python main.py
+    python main.py
 
-Then open your browser and go to:
+Open the local development server in a browser:
 
-http://127.0.0.1:5000
-
----
-
-## How To Use
-
-1. Enter the topic of your paper, thesis, or research project.
-2. Enter your key research questions.
-3. Optionally enter a timeframe for the papers, such as `2020-2025`.
-4. Click **Generate Report**.
-5. Review the generated papers, formulas, trends, and raw JSON output.
+    http://127.0.0.1:5000
 
 ---
 
-## API Route
+## How to Use
 
-The app also includes a JSON API endpoint:
-
-POST /api/report
-
-Example JSON body:
-
-{
-  "topic": "Reinforcement learning for autonomous drones",
-  "questions": "How can reinforcement learning improve navigation in GPS-denied environments?",
-  "timeframe": "2020-2025"
-}
-
-The API returns a structured JSON report.
+1. Enter a research topic.
+2. Enter one or more key research questions.
+3. Optionally enter a timeframe for the papers.
+4. Click Generate Report.
+5. Review the generated report.
+6. Use the raw JSON output for further processing, exporting, or integration.
 
 ---
 
-## Notes
+## Example Topics
 
-This app is intended as a research assistant, not a replacement for manual academic research.
+- Reinforcement learning for autonomous drones
+- Machine learning for medical imaging
+- Computer vision for agricultural robotics
+- Digital twins in smart manufacturing
+- Cybersecurity in IoT networks
+- AI-assisted engineering design
+- Robotics for precision agriculture
 
-The generated paper list, formulas, and trends should be checked against real academic databases such as:
+---
+
+## API Endpoint
+
+The application includes a JSON API endpoint:
+
+    POST /api/report
+
+Expected JSON fields:
+
+    {
+      "topic": "Reinforcement learning for autonomous drones",
+      "questions": "How can reinforcement learning improve navigation in GPS-denied environments?",
+      "timeframe": "2020-2025"
+    }
+
+The endpoint returns a structured JSON research report.
+
+---
+
+## Output Structure
+
+The generated report includes:
+
+- Topic
+- Research questions
+- Timeframe
+- Relevant papers
+- Important formulas
+- Recent trends
+
+Each paper includes:
+
+- Title
+- Authors
+- Year
+- Venue
+- URL where available
+- Relevance to the research topic
+
+Each formula includes:
+
+- Name
+- LaTeX source
+- Description
+- Reference where available
+
+Each trend includes:
+
+- Title
+- Description
+- Supporting references
+
+---
+
+## Important Notes
+
+This application is a research assistant, not a replacement for proper academic verification.
+
+Generated results should be checked against trusted academic sources before being used in formal work.
+
+Recommended sources for verification include:
 
 - Google Scholar
 - IEEE Xplore
@@ -165,7 +218,7 @@ The generated paper list, formulas, and trends should be checked against real ac
 - SpringerLink
 - arXiv
 
-Always verify citations, paper details, formulas, and sources before using the output in academic work.
+Citations, formulas, paper metadata, and source links should always be manually verified before use in academic writing.
 
 ---
 
@@ -175,30 +228,32 @@ Always verify citations, paper details, formulas, and sources before using the o
 
 Install the missing package:
 
-python -m pip install python-dotenv
+    python -m pip install python-dotenv
 
 ### 429 insufficient_quota
 
 This means the OpenAI API account does not currently have available billing quota or credits.
 
-Fix it by checking your OpenAI API billing settings and making sure the API key belongs to a funded project.
+To resolve this, check the OpenAI API billing settings and confirm that the API key belongs to a project with available usage.
 
 ---
 
 ## Future Improvements
 
-Possible future additions:
+Planned or possible future improvements include:
 
-- Export report to PDF
-- Export report to Word document
+- Export reports to PDF
+- Export reports to Word documents
 - Save generated reports
+- Add citation formatting
+- Add APA, IEEE, and Harvard reference styles
 - Add real academic database search
-- Add citation formatting such as APA, IEEE, or Harvard
 - Add user authentication
-- Deploy online using Render, Railway, or Vercel
+- Add report history
+- Deploy the application online
 
 ---
 
 ## License
 
-This project is for educational and research-assistance purposes.
+This project is for educational, research-assistance, and portfolio demonstration purposes.
